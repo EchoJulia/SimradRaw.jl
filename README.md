@@ -7,7 +7,7 @@
 [![codecov.io](http://codecov.io/github/robblackwell/SimradRaw.jl/coverage.svg?branch=master)](http://codecov.io/github/robblackwell/SimradRaw.jl?branch=master)
 
 Simrad echosounder RAW file format reader for
-[Julia](http://julialiang.org)
+[Julia](http://julialang.org)
 
 
 ## Introduction
