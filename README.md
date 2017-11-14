@@ -6,30 +6,39 @@
 
 [![codecov.io](http://codecov.io/github/robblackwell/SimradRaw.jl/coverage.svg?branch=master)](http://codecov.io/github/robblackwell/SimradRaw.jl?branch=master)
 
-Simrad echosounder RAW file format reader for
+Simrad echosounder RAW file format reader in
 [Julia](http://julialang.org)
 
 
 ## Introduction
 
-Reads Simrad echosounder RAW format files.
+Simrad scientific echosounders such as EK60, EK80 and WBT save their
+data in datagram oriented, RAW format files as described in the
+reference manuals.
+
+This Julia library reads RAW format files, returning their contents as
+a series of Julia structs representing datagrams. It is intended to be
+used by higher level libraries such as SimradEK60.jl, coming soon,
+that interprete the data to provide matrices of volume backscatter
+etc.
 
 ## Getting started
 
 ```
-julia> datagrams = collect(datagrams("myfile.raw"))
+using SimradRaw
+datagrams = collect(datagrams("myfile.raw"))
 ```
+
+Also see the example `bin\rawcat.jl`, a command line program that
+dumps out RAW files in a somewhat readable format.
 
 ## Testing
 
-	Pkg.test("SimradRaw")
+`Pkg.test("SimradRaw")`
 
 ## References
 
-398126A_WBAT Reference Manual.pdf,
+1. [Simrad EK60 Context sensitive on-line help](http://www.simrad.net/ek60_ref_english/default.htm)
 
-http://www.simrad.net/ek80_ref_english/default.htm,
-
-https://www.simrad.com/www/01/NOKBG0397.nsf/AllWeb/F2AB311B3F6E6B15C1257106003E0806/$file/164692ad_ek60_reference_manual_english_lores.pdf 
-
+2. [Simrad EK80 Wide band scientific echo sounder Reference Manual](http://www.simrad.net/ek80_ref_english/default.htm)
 
