@@ -83,7 +83,8 @@ end
 designated by `filename`.
 
 """
-function datagrams(filename::AbstractString; datagramreader=readdatagram)
+function datagrams(filename::AbstractString;
+                   datagramreader=readdatagram::Function)
 
     # FIXME: The spec requires us to check endianness by comparing
     # length fields, but in practice, everyone is using PC/Windows
@@ -103,7 +104,8 @@ end
 
 #
 
-function readencapsulateddatagram(stream::IO; datagramreader=readdatagram)
+function readencapsulateddatagram(stream::IO;
+                                  datagramreader=readdatagram::Function)
     length = readlong(stream)
     datagram = datagramreader(stream, length)
     length2 = length = readlong(stream)
@@ -134,7 +136,7 @@ function filetime(d::DatagramHeader)
 end
 
 
-function readdatagramheader(stream::IO, length)
+function readdatagramheader(stream::IO, length::Integer)
     headerlength = 12
     datagramtype = readchars(stream, 4)
     datetime = readdatetime(stream)
