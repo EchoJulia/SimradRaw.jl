@@ -1,3 +1,4 @@
+__precompile__()
 module SimradRaw
 
 export datagrams, readencapsulateddatagram, readdatagramblock, readdatagrambody,
@@ -315,8 +316,8 @@ struct SampleDatagram0 <: Datagram
     # y = x (10    # * log10(2) / 256) where: x = power value derived
     # from the datagram, y = converted value (in dB)
 
-    alongshipangle::Array{Int8} # See Remark 2 below!
     athwartshipangle::Array{Int8}
+    alongshipangle::Array{Int8} # See Remark 2 below!
 
     # 2. Angle: The fore-and-aft (alongship) and athwartship
     # electrical angles are output as one 16-bit word. The alongship
@@ -354,8 +355,9 @@ function readsamplebinarydatagram0(stream::IO, dgheader::DatagramHeader)
     power = readshorts(stream, count) # Compressed format - See Remark 1!
 
     angles = readint8s(stream, count * 2)
-    alongshipangle = angles[1:2:end]
-    athwartshipangle = angles[2:2:end]
+
+    athwartshipangle = angles[1:2:end]
+    alongshipangle = angles[2:2:end]
 
 
     SampleDatagram0(dgheader, channel, mode, transducerdepth,
@@ -363,7 +365,7 @@ function readsamplebinarydatagram0(stream::IO, dgheader::DatagramHeader)
                     sampleinterval, soundvelocity,
                     absorptioncoefficient, heave, txroll, txpitch,
                     temperature, rxroll, rxpitch, offset, count,
-                    power, alongshipangle, athwartshipangle)
+                    power, athwartshipangle, alongshipangle)
 
 end
 
