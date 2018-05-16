@@ -177,7 +177,7 @@ function readdatagrambody(stream::IO, length::Integer, dgheader::DatagramHeader)
         return readtextdatagram(stream, length, dgheader)
     else
         warn("No implementation for ", datagramtype)
-        return readbinarydatagram(stream, length)
+        return readbinarydatagram(stream, length, dgheader)
     end
 end
 
@@ -359,12 +359,17 @@ function readsamplebinarydatagram0(stream::IO, dgheader::DatagramHeader)
     rxpitch = readfloat(stream) # [Deg]
     offset = readlong(stream) # First sample
     count = readlong(stream) # Number of samples
+
     power = readshorts(stream, count) # Compressed format - See Remark 1!
 
-    angles = readint8s(stream, count * 2)
-
-    athwartshipangle = angles[1:2:end]
-    alongshipangle = angles[2:2:end]
+    athwartshipangle = []
+    alongshipangle = []
+    
+    if mode != 1
+        angles = readint8s(stream, count * 2)
+        athwartshipangle = angles[1:2:end]
+        alongshipangle = angles[2:2:end]
+    end
 
 
     SampleDatagram0(dgheader, channel, mode, transducerdepth,
