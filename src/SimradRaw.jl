@@ -3,13 +3,7 @@ module SimradRaw
 
 export datagrams, readencapsulateddatagram, readdatagramblock,
     readdatagrambody, readdatagram, readdatagramheader, Datagram,
-    filetime, EK60_SAMPLE, EK80_SAMPLE
-
-const EK60_SAMPLE = joinpath(dirname(@__FILE__),
-                       "../test/data/ek60/jr16003/ek60-sample.raw")
-
-const EK80_SAMPLE = joinpath(dirname(@__FILE__),
-                  "../test/data/ek80/EK80_Example_Data_01/EK80_SimradEcho_WC381_Sequential-D20150513-T090935.raw")
+    filetime
 
 # References
 # Simrad EK60 Context sensitive on-line help, Release 2.4.X,

@@ -26,7 +26,9 @@ etc.
 
 ```
 using SimradRaw
-datagrams = collect(datagrams("myfile.raw"))
+using SimradEK60TestData
+filename = EK60_SAMPLE # or some other RAW file
+datagrams = collect(datagrams(filename))
 ```
 
 Also see the example `bin\rawcat.jl`, a command line program that
