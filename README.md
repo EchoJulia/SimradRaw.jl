@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/EchoJulia/SimradRaw.jl.svg?branch=master)](https://travis-ci.org/EchoJulia/SimradRaw.jl)
 
-<!-- [![Coverage Status](https://coveralls.io/repos/robblackwell/SimradRaw.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/robblackwell/SimradRaw.jl?branch=master) -->
+[![Coverage Status](https://coveralls.io/repos/EchoJulia/SimradRaw.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/EchoJulia/SimradRaw.jl?branch=master)
 
-<!-- [![codecov.io](http://codecov.io/github/robblackwell/SimradRaw.jl/coverage.svg?branch=master)](http://codecov.io/github/robblackwell/SimradRaw.jl?branch=master) -->
+[![codecov.io](http://codecov.io/github/EchoJulia/SimradRaw.jl/coverage.svg?branch=master)](http://codecov.io/github/EchoJulia/SimradRaw.jl?branch=master)
 
 Simrad echosounder RAW file format reader in
 [Julia](http://julialang.org)
