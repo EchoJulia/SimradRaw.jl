@@ -88,20 +88,27 @@ designated by `filename`.
 function datagrams(filename::AbstractString;
                    datagramreader=readdatagram::Function)
 
-    # FIXME: The spec requires us to check endianness by comparing
-    # length fields, but in practice, everyone is using PC/Windows
+    datagrams([filename], datagramreader=datagramreader)
+end
 
+function datagrams(filenames::Vector{String};
+                   datagramreader=readdatagram::Function)
     function _it(chn1)
-        open(filename) do f
-            while !eof(f)
-                datagram = readencapsulateddatagram(f, datagramreader=datagramreader)
-                put!(chn1, datagram)
+        for filename in filenames
+            
+            # FIXME: The spec requires us to check endianness by comparing
+            # length fields, but in practice, everyone is using PC/Windows
+            
+            open(filename) do f
+                while !eof(f)
+                    datagram = readencapsulateddatagram(f, datagramreader=datagramreader)
+                    put!(chn1, datagram)
+                end
             end
         end
     end
 
-    return Channel(_it)
-
+    return Channel(_it, ctype=Datagram)
 end
 
 #
