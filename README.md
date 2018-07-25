@@ -18,7 +18,7 @@ reference manuals.
 
 This Julia library reads RAW format files, returning their contents as
 a series of Julia structs representing datagrams. It is intended to be
-used by higher level libraries such as SimradEK60.jl, coming soon,
+used by higher level libraries such as https://github.com/EchoJulia/SimradEK60.jl,
 that interprete the data to provide matrices of volume backscatter
 etc.
 
