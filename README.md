@@ -28,10 +28,10 @@ etc.
 using SimradRaw
 using SimradEK60TestData
 filename = EK60_SAMPLE # or some other RAW file
-datagrams = collect(datagrams(filename))
+datagrams = SimradRaw.load(filename)
 ```
 
-Also see the example `bin\rawcat.jl`, a command line program that
+Also see the example `scripts\rawcat.jl`, a command line program that
 dumps out RAW files in a somewhat readable format.
 
 ## Testing
