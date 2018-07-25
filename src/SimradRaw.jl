@@ -106,6 +106,12 @@ end
 
 #
 
+function load(filename::AbstractString)
+    collect(datagrams(filename))
+end
+
+#
+
 function readencapsulateddatagram(stream::IO;
                                   datagramreader=readdatagram::Function)
     length = readlong(stream)
