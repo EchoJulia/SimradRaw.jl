@@ -40,11 +40,15 @@ function readfloats(stream::IO, n::Integer)
 end
 
 function readshorts(stream::IO, n::Integer)
-    read(stream, Int16, n)
+    b = Array{Int16}(undef,n)
+    read!(stream, b)
+    return b
 end
 
 function readint8s(stream::IO, n::Integer)
-    read(stream, Int8, n)
+    b = Array{Int8}(undef,n)
+    read!(stream, b)
+    return b
 end
 
 function readushorts(stream::IO, n::Integer)
