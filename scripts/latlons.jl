@@ -17,7 +17,7 @@ function summarise(filename)
     _datagrams = collect(datagrams(filename))
 
     # All NMEA datagrams
-    n = find(x -> typeof(x) == SimradRaw.TextDatagram && x.dgheader.datagramtype == "NME0", _datagrams)
+    n = findall(x -> typeof(x) == SimradRaw.TextDatagram && x.dgheader.datagramtype == "NME0", _datagrams)
     nmeas = [parsenmea(_datagrams[i].text) for i in n]
 
     for nmea in nmeas
