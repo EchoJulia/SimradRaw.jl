@@ -34,10 +34,6 @@ datagrams = SimradRaw.load(filename)
 Also see the example `scripts\rawcat.jl`, a command line program that
 dumps out RAW files in a somewhat readable format.
 
-## Testing
-
-`Pkg.test("SimradRaw")`
-
 ## References
 
 1. [Simrad EK60 Context sensitive on-line help](http://www.simrad.net/ek60_ref_english/default.htm)
