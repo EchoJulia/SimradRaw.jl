@@ -39,32 +39,17 @@ function readfloats(stream::IO, n::Integer)
     reinterpret(Float32, read(stream, 4 * n))
 end
 
-
-@static if VERSION < v"0.7.0-DEV.2005"
-
-    function readshorts(stream::IO, n::Integer)
-        read(stream, Int16, n)
-    end
-
-    function readint8s(stream::IO, n::Integer)
-        read(stream, Int8, n)
-    end
-else
-    function readshorts(stream::IO, n::Integer)
-        b = Array{Int16}(undef,n)
-        read!(stream, b)
-        return b
-    end
-
-    function readint8s(stream::IO, n::Integer)
-        b = Array{Int8}(undef,n)
-        read!(stream, b)
-        return b
-    end
+function readshorts(stream::IO, n::Integer)
+    b = Array{Int16}(undef,n)
+    read!(stream, b)
+    return b
 end
 
-
-
+function readint8s(stream::IO, n::Integer)
+    b = Array{Int8}(undef,n)
+    read!(stream, b)
+    return b
+end
 
 function readushorts(stream::IO, n::Integer)
     read(stream, UInt16, n)
