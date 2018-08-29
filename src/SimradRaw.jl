@@ -1,4 +1,3 @@
-__precompile__()
 module SimradRaw
 
 export datagrams, readencapsulateddatagram, readdatagramblock,
