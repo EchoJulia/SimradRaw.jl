@@ -186,7 +186,7 @@ function readdatagrambody(stream::IO, length::Integer, dgheader::DatagramHeader)
     elseif datagramtype == "TAG0"
         return readtextdatagram(stream, length, dgheader)
     else
-        warn("No implementation for ", datagramtype)
+        @warn("No implementation for ", datagramtype)
         return readbinarydatagram(stream, length, dgheader)
     end
 end
