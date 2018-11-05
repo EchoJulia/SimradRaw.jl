@@ -89,13 +89,14 @@ designated by `filename`.
 
 """
 function datagrams(filename::AbstractString;
-                   datagramreader=readdatagram::Function)
+                   datagramreader=readdatagram::Function, handleexceptions=false)
 
-    datagrams([filename], datagramreader=datagramreader)
+    datagrams([filename], datagramreader=datagramreader, handleexceptions)
 end
 
 function datagrams(filenames::Vector{String};
-                   datagramreader=readdatagram::Function)
+                   datagramreader=readdatagram::Function,
+                   handleexceptions=false)
     function _it(chn1)
         for filename in filenames
             
@@ -103,9 +104,20 @@ function datagrams(filenames::Vector{String};
             # length fields, but in practice, everyone is using PC/Windows
             
             open(filename) do f
-                while !eof(f)
-                    datagram = readencapsulateddatagram(f, datagramreader=datagramreader)
-                    put!(chn1, datagram)
+                er = false
+                while !eof(f) && !er
+                    try
+                        datagram = readencapsulateddatagram(f, datagramreader=datagramreader)
+                        put!(chn1, datagram)
+                    catch ex
+                        if !handleexceptions
+                            rethrow(ex)
+                        end
+                        # We regularly see corruption towards the end of RAW files
+                        p = position(f)
+                        @warn("Can't read datagram from $filename ($p), skipping")
+                        er = true
+                    end
                 end
             end
         end
@@ -186,8 +198,9 @@ function readdatagrambody(stream::IO, length::Integer, dgheader::DatagramHeader)
     elseif datagramtype == "TAG0"
         return readtextdatagram(stream, length, dgheader)
     else
-        @warn("No implementation for ", datagramtype)
-        return readbinarydatagram(stream, length, dgheader)
+        d = readbinarydatagram(stream, length, dgheader)
+        @warn("Unrecognised datagram type, treating as binary, ", datagramtype)
+        return d
     end
 end
 
