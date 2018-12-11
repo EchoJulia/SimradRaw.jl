@@ -91,7 +91,7 @@ designated by `filename`.
 function datagrams(filename::AbstractString;
                    datagramreader=readdatagram::Function, handleexceptions=false)
 
-    datagrams([filename], datagramreader=datagramreader, handleexceptions)
+    datagrams([filename], datagramreader=datagramreader, handleexceptions=handleexceptions)
 end
 
 function datagrams(filenames::Vector{String};
