@@ -1,0 +1,12 @@
+name = "SimradRaw"
+uuid = "83a1bcd9-a884-567d-b532-90bac4ae8d51"
+
+[compat]
+julia = "≥ 0.7.0"
+
+[extras]
+SimradEK60TestData = "6560e86b-c63b-5eb7-baae-f1872a4305ea"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test", "SimradEK60TestData"]
